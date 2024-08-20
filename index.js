@@ -1,25 +1,44 @@
-const express = require('express')
-const app = express()
+const { ApolloServer } = require('apollo-server')
 
-const teamRouter = require('./routes/team.js')
-const peopleRouter = require('./routes/people.js')
-const roleRouter = require('./routes/role.js')
-const softwareRouter = require('./routes/software.js')
-const equipmentRouter = require('./routes/equipment.js')
-const supplyRouter = require('./routes/supply.js')
+const queries = require('./typedefs-resolvers/_queries')
+const mutations = require('./typedefs-resolvers/_mutations')
+const enums = require('./typedefs-resolvers/_enums')
+const teams = require('./typedefs-resolvers/teams')
+const people = require('./typedefs-resolvers/people')
+const roles = require('./typedefs-resolvers/roles')
+const equipments = require('./typedefs-resolvers/equipments')
+const softwares = require('./typedefs-resolvers/softwares')
+const supplies = require('./typedefs-resolvers/supplies')
+const tools = require('./typedefs-resolvers/tools')
+const givens = require('./typedefs-resolvers/givens')
 
-const port = 3000
+const typeDefs = [
+    queries,
+    mutations,
+    enums,
+    teams.typeDefs,
+    people.typeDefs,
+    roles.typeDefs,
+    equipments.typeDefs,
+    softwares.typeDefs,
+    supplies.typeDefs,
+    tools.typeDefs,
+    givens.typeDefs
+]
 
-app.use(express.json())
-app.use(express.urlencoded())
+const resolvers = [
+    teams.resolvers,
+    people.resolvers,
+    roles.resolvers,
+    equipments.resolvers,
+    softwares.resolvers,
+    supplies.resolvers,
+    tools.resolvers,
+    givens.resolvers
+]
 
-app.use('/api/team', teamRouter)
-app.use('/api/people', peopleRouter)
-app.use('/api/role', roleRouter)
-app.use('/api/software', softwareRouter)
-app.use('/api/equipment', equipmentRouter)
-app.use('/api/supply', supplyRouter)
+const server =  new ApolloServer({typeDefs, resolvers})
 
-app.listen(port, () => {
-  console.log(`REST API listening at http://localhost:${port}`)
+server.listen().then(({url}) => {
+    console.log(`🚀  Server ready at ${url}`)
 })
