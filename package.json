@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^3.13.0",
-    "convert-csv-to-json": "^2.48.0"
+    "convert-csv-to-json": "^2.48.0",
+    "lodash": "^4.17.21"
   }
 }
