@@ -3,8 +3,8 @@ const dbWorks = require("../dbWorks");
 const { equipments } = require("../database");
 
 const typeDefs = gql`
-  type Equipment {
-    id: String
+  type Equipment implements Tool {
+    id: ID!
     used_by: Role!
     count: Int
     new_or_used: NewOrUsed
@@ -45,6 +45,6 @@ const resolvers = {
 };
 
 module.exports = {
-  typeDefs: typeDefs,
-  resolvers: resolvers,
+  typeDefs,
+  resolvers,
 };
