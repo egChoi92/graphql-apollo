@@ -10,16 +10,31 @@ const typeDefs = gql`
     blood_type: BloodType!
     serve_years: Int!
     role: Role!
-    team: String!
+    team: Int!
     from: String!
     tools: [Tool]
     givens: [Given]
+  }
+  input PostPersonInput {
+    first_name: String!
+    last_name: String!
+    sex: Sex!
+    blood_type: BloodType!
+    serve_years: Int!
+    role: Role!
+    team: Int!
+    from: String!
   }
 `;
 
 const resolvers = {
   Query: {
-    people: (parent, arg) => dbWorks.getPeople(args),
+    people: (parent, args) => dbWorks.getPeople(args),
+    peopleFiltered: (parent, args) => dbWorks.getPeople(args),
+    peoplePaginated: (parent, args) => dbWorks.getPeople(args),
+  },
+  Mutation: {
+    postPerson: (parent, args) => dbWorks.postPerson(args),
   },
 };
 
