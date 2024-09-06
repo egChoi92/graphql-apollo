@@ -1,10 +1,10 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import React, { useState } from "react";
 import "./App.css";
-
-import People from "./components/people";
-import Roles from "./components/roles";
-import Teams from "./components/teams";
+import "./components/components.css";
+import People from "./components/people/People";
+import Roles from "./components/role/Roles";
+import Teams from "./components/teams/Teams";
 
 // client: GraphQL 서버로와 정보를 주고받을 ApolloClient 객체
 const client = new ApolloClient({
